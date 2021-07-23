@@ -1,34 +1,39 @@
-node {
-    def app
+pipeline{
+  
+  agent any
+   def app	
+  stages{    
 	
-    stage('Clone repository') {
-        /* Cloning the Repository to our Workspace */
+	 stage('Build image') {
+		steps{
+			 /* This builds the actual image */
 
-        checkout scm
-    }
-
-    stage('Build image') {
-        /* This builds the actual image */
-
-        app = docker.build("9535236403/nodeapp")
+			app = docker.build("maheshr/nodeapp")
+		}
+       
     }
 
     stage('Test image') {
         
-        app.inside {
+		steps{
+			app.inside {
             echo "Tests passed"
         }
+		}
+        
     }
 
     stage('Push image') {
-        /* 
+       steps{
+			 /* 
 			You would need to first register with DockerHub before you can push images to your account
 		*/
-	echo "build images is started......"
         docker.withRegistry('https://registry.hub.docker.com', 'docker-hub') {
             app.push("${env.BUILD_NUMBER}")
             app.push("latest")
             } 
                 echo "Trying to Push Docker Build to DockerHub"
+	   }
     }
+  }  
 }
