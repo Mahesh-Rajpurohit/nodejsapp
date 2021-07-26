@@ -1,6 +1,6 @@
 node {
-    def app	
-    agent any
+    def app
+	
     stage('Clone repository') {
         /* Cloning the Repository to our Workspace */
 
