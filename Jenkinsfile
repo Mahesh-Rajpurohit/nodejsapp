@@ -3,8 +3,10 @@ node{
      checkout scm
 	
      docker.withRegistry('https://registry.hub.docker.com', 'docker-hub') {
-            
-  	def customImage = docker.build("my-image:${env.BUILD_ID}")
+        
+	echo "pushing image"
+	     
+  	def customImage = docker.build("9535236403/nodeapp")
 	     
 	customImage.push()
 			
