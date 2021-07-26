@@ -1,5 +1,11 @@
 # use a node base image
 FROM node:7-onbuild
+
+# Install OpenJDK-11
+RUN apt-get update && \
+    apt-get install -y openjdk-11-jre-headless && \
+    apt-get clean;
+
 # set maintainer
 LABEL maintainer "mahesh.rajpurohit@augmentolabs.com"
 
