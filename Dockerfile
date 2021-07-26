@@ -1,12 +1,5 @@
 # use a node base image
 FROM node:7-onbuild
-
-FROM jenkins
-USER root
-
-RUN apt-get update && apt-get install -y docker.io 242 && rm -rf /var/lib/apt/lists/*
-user jenkins
-
 # set maintainer
 LABEL maintainer "mahesh.rajpurohit@augmentolabs.com"
 
